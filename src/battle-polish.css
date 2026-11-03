@@ -1,0 +1,192 @@
+/* Duel-only polish. The arena uses the mockup's parchment, jade and gilt
+   composition; all real skill buttons and four-card formation rules remain. */
+.screen-battle .scene-background {
+  background-image: url('../assets/polish/battle-background.png');
+  background-position: center;
+  background-size: cover;
+  filter: saturate(.98) contrast(1.015);
+}
+.screen-battle .scene-shade {
+  background: linear-gradient(90deg, #fff2d80a 0%, transparent 68%, #09262a16 100%);
+}
+.screen-battle::after { border: 0 !important; }
+.screen-battle .edge-flourish { display: none; }
+.screen-battle .ambient i { opacity: .32; }
+
+/* An expansive resource tray anchors the top, like the reference board. */
+.screen-battle .combat-top {
+  left: 20px; right: auto; top: 12px; width: 1140px; height: 116px;
+  gap: 12px; align-items: flex-start;
+}
+.screen-battle .combat-top > .round {
+  position: absolute; left: 1px; top: 13px; width: 43px; height: 43px;
+  background: #193039eb;
+}
+.screen-battle .combat-top > div:not(.phase-pool) {
+  position: absolute; left: 56px; top: 14px; width: 160px;
+  text-shadow: 0 2px 5px #181d20, 0 0 12px #151f23;
+}
+.screen-battle .combat-top .eyebrow { font-size: 13px; letter-spacing: 1px; color: #ffedba; }
+.screen-battle .combat-top h2 { font: 600 22px/1.15 Cormorant, Georgia, serif; color: #fff0cc; margin-top: 6px; }
+.screen-battle .combat-top h2 small { display: block; margin: 4px 0 0; color: #eadfbd; font: 14px Georgia, serif; }
+.screen-battle .phase-pool {
+  left: 220px; top: 0; width: 870px; height: 102px;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 25px; padding: 11px 96px 21px 114px;
+  border: 2px solid #c9a967; border-radius: 16px 42px 17px 35px;
+  background: linear-gradient(180deg, #0b212de8, #1c3541ee 55%, #0c252dea);
+  box-shadow: inset 0 0 0 4px #0d2530, inset 0 0 0 5px #ad895166, 0 5px 15px #11242c7a;
+}
+.screen-battle .phase-pool::before {
+  content: 'PHASE\A QI'; white-space: pre; position: absolute; left: 23px; top: 30px;
+  text-align: center; font: 13px/1.5 Georgia, serif; letter-spacing: 2px; color: #e8cc92;
+}
+.screen-battle .phase-pool::after {
+  content: '五行'; position: absolute; right: 25px; top: 33px;
+  font: 26px Georgia, serif; letter-spacing: 3px; color: #d9bd7c;
+}
+.screen-battle .phase-pool .phase {
+  width: 59px; height: 59px; font-size: 38px; border-width: 2px;
+  background: radial-gradient(circle at 45% 35%, #8ab3af35, #112a35 62%, #081923);
+  box-shadow: inset 0 0 15px var(--phase), 0 0 10px color-mix(in srgb, var(--phase) 32%, transparent);
+}
+.screen-battle .phase-pool b {
+  right: -7px; bottom: -13px; width: 29px; height: 29px;
+  font: 600 18px/25px Georgia, serif; border: 2px solid #e3c685;
+  background: #142d36; color: #fff2ce;
+}
+.screen-battle .combat-round {
+  position: absolute; left: 1215px; top: 294px; width: 310px; margin: 0;
+  color: #5a375b; text-align: center; letter-spacing: 3px;
+  font: 600 15px Georgia, serif; text-shadow: 0 1px 1px #fff6e3;
+}
+.screen-battle .combat-round b { font-size: 32px; color: #5f306b; text-shadow: 0 1px 1px #fff6e3; }
+
+/* Four compact portrait cards per row. Wide bosses still fit beside two allies. */
+.screen-battle .battle-board { left: 238px; top: 156px; width: 900px; height: 584px; bottom: auto; }
+.screen-battle .enemy-row, .screen-battle .ally-row { height: 278px; gap: 28px; align-items: flex-start; }
+.screen-battle .enemy-row { top: 0; bottom: auto; }
+.screen-battle .ally-row { top: 306px; bottom: auto; }
+.screen-battle .battle-card {
+  width: 198px; height: 278px; flex: 0 0 auto; border: 1px solid #edcc86;
+  border-radius: 11px 4px 11px 4px;
+  background: linear-gradient(150deg, #163b42, #071e29 80%);
+  box-shadow: 0 0 0 2px #8e713f, 0 4px 9px #36251266, 0 0 13px color-mix(in srgb, var(--phase) 28%, transparent);
+}
+.screen-battle .battle-card::before { inset: -6px; opacity: .98; filter: drop-shadow(0 1px 1px #523d27); }
+.screen-battle .battle-card.boss { width: 360px; box-shadow: 0 0 0 2px #a07636, 0 0 22px #dcae5166; }
+.screen-battle .enemy-row:has(.battle-card:nth-child(4)) .battle-card.boss { width: 198px; }
+.screen-battle .battle-target { height: 174px; border-radius: 9px 3px 0 0; z-index: auto; }
+.screen-battle .battle-target .hero-art { height: 300px; transform: translateY(-16px); }
+.screen-battle .battle-card:not(.fallen) .hero-art { animation: battle-art-breath 8s ease-in-out infinite alternate; transform-origin: 50% 25%; }
+.screen-battle .battle-target .boss-art { height: 370px; top: -60px; }
+.screen-battle .battle-name {
+  top: 5px; bottom: auto; left: 32px; right: 29px; height: 25px; padding: 3px 1px;
+  background: linear-gradient(#102932f5, #102932b0, transparent);
+  color: #fff5de; font: 600 13px/18px Georgia, serif;
+  text-transform: none; text-shadow: 0 1px 3px #00141c; letter-spacing: -.25px;
+}
+.screen-battle .battle-target .phase {
+  left: 4px; top: 4px; width: 29px; height: 29px; font-size: 21px;
+  box-shadow: inset 0 0 9px var(--phase), 0 1px 4px #0008;
+}
+.screen-battle .battle-target .card-level { top: 4px; right: 2px; padding: 4px 3px; font: 10px Georgia, serif; }
+.screen-battle .battle-skills { left: 6px; right: 6px; top: 176px; gap: 3px; }
+.screen-battle .battle-card .skill {
+  height: 23px; min-height: 23px; padding: 2px 21px 2px 20px; border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--phase) 52%, #ac915b);
+  background: linear-gradient(90deg, #16323df7, color-mix(in srgb, var(--phase) 24%, #17333c), #102c37f5);
+  font: 13px/17px Georgia, serif; letter-spacing: -.2px; text-transform: none;
+  text-shadow: 0 1px 2px #001018; color: #fff8e5;
+  box-shadow: inset 0 0 6px color-mix(in srgb, var(--phase) 26%, transparent);
+}
+.screen-battle .battle-card .skill[data-index='2'] { font-size: 13px; }
+.screen-battle .battle-card .skill.cooldown { filter: saturate(.65) brightness(.82); box-shadow: none; color: #e1dfce; }
+.screen-battle .battle-card .skill.armed { border-color: #fff1b2; box-shadow: 0 0 13px #f8d579; filter: brightness(1.25); }
+.screen-battle .skill-glyph { left: 5px; top: 2px; font-size: 13px; }
+.screen-battle .skill b, .screen-battle .skill > small { right: 5px; top: 2px; font: 600 13px/17px Georgia, serif; }
+.screen-battle .health { left: 7px; right: 7px; bottom: 9px; height: 15px; border-color: #d9cb8b; border-radius: 5px; }
+.screen-battle .health i { background: linear-gradient(#b8eb50, #61bb20); box-shadow: 0 0 5px #9bd82b; }
+.screen-battle .health span { font: 600 12px/13px Georgia, serif; }
+.screen-battle .statuses { top: calc(100% + 3px); bottom: auto; padding-top: 0; gap: 4px; min-height: 20px; z-index: 6; align-items: center; }
+.screen-battle .statuses > span { font: 11px/15px Georgia, serif; padding: 1px 3px; background: #15343a; border-color: #d2b575; box-shadow: 0 1px 3px #3d341b66; }
+.screen-battle .battle-card .passive-seal { width: 20px; height: 20px; flex: 0 0 20px; font: 14px/16px Georgia, serif; padding: 1px; border-color: #c9a85c; background: #173b40; color: #f7e3aa; }
+.screen-battle .battle-card .passive-seal[style*='0.4'] { opacity: .86 !important; color: #e3d7b3; background: #29454a; }
+.screen-battle .battle-card .passive-seal[style*='opacity:1'] { opacity: 1 !important; border-color: #ffe4a2; color: #fff2bc; background: #78531f; box-shadow: 0 0 6px #e6be6688; }
+.screen-battle .qi-shield { top: 151px; left: 9px; right: 9px; height: 7px; }
+.screen-battle .boss-countdown { position: absolute; z-index: 8; top: 158px; left: 0; right: 0; padding: 1px !important; font: 11px/13px Georgia, serif !important; background: #142e39f0; }
+.screen-battle .battle-divider { display: none; }
+.screen-battle .battle-divider span { font: 12px/17px Georgia, serif; color: #4a483f; text-shadow: 0 1px #fff4d7; letter-spacing: .2px; }
+
+/* Real controls rest over the large right-hand jade plates. */
+.screen-battle .combat-sidebar { left: 1200px; right: auto; top: 0; bottom: 0; width: 370px; display: block; }
+.screen-battle .battle-seal {
+  position: absolute; left: 28px; top: 15px; width: 315px; height: 286px; margin: 0;
+  border: 0; border-radius: 0; background: none; box-shadow: none;
+}
+.screen-battle .battle-seal span {
+  display: flex; align-items: center; justify-content: center; width: 72px; height: 132px;
+  color: #34352c; font: 64px Georgia, serif; text-shadow: 0 1px #fff2c8;
+  background: linear-gradient(90deg, #cbaa64, #ffe7a7 32%, #f3d68b 70%, #b9954d);
+  border: 2px solid #f6d78f; box-shadow: 0 2px 0 #78562d, 0 8px 16px #14303175;
+}
+.screen-battle .combat-sidebar > .btn.primary {
+  position: absolute; left: 23px; top: 360px; width: 300px; height: 96px; min-height: 0;
+  padding: 14px 21px; border: 0; border-radius: 0; box-shadow: none;
+  background: url('../assets/polish/vermilion-button.png') center / 100% 100% no-repeat;
+  font: 600 28px Georgia, serif; text-transform: none; color: #fff2c5;
+  text-shadow: 0 2px 3px #582a18;
+}
+.screen-battle .combat-sidebar > .btn.primary::before,
+.screen-battle .combat-sidebar > .btn.primary::after { display: none; }
+.screen-battle .combat-sidebar > .btn.subtle {
+  position: absolute; left: 37px; top: 469px; width: 272px; min-height: 42px;
+  font: 600 20px Cormorant, Georgia, serif;
+  background: #12343edb; border-radius: 15px; border-color: #cfb776;
+}
+.screen-battle .qi-display {
+  position: absolute; left: 45px; top: 550px; width: 260px; height: 76px; padding: 4px 0 23px;
+  color: #fff0bf; background: linear-gradient(90deg, transparent, #183c3dcf, transparent);
+  text-shadow: 0 2px 4px #19312b;
+}
+.screen-battle .qi-display strong { font: 600 39px Georgia, serif; color: #fff1c4; }
+.screen-battle .qi-display strong small { font-size: 20px; color: #e2e1c2; }
+.screen-battle .qi-display > span { bottom: 5px; font: 11px Georgia, serif; letter-spacing: 2px; color: #f0dbab; }
+.screen-battle .harmony-display {
+  position: absolute; left: 45px; top: 635px; width: 260px; min-height: 79px; padding: 5px 0 6px;
+  background: radial-gradient(ellipse, #133b3deb 20%, #173e3bbd 70%, transparent);
+  border-color: #d3b5708c; text-shadow: 0 2px 4px #17302c;
+}
+.screen-battle .harmony-display > span { color: #eaddae; font-size: 11px; }
+.screen-battle .harmony-display strong { font: 600 34px Georgia, serif; color: #fff1ba; }
+.screen-battle .harmony-display small { font: 12px Georgia, serif; color: #e8e9ce; }
+.screen-battle .empower-toggle {
+  position: absolute; left: 45px; top: 727px; width: 260px; min-height: 46px; margin: 0;
+  padding: 6px 1px; background: #173b3ad1; border-radius: 8px;
+  font: 17px Georgia, serif; color: #fff0c8; text-shadow: 0 1px 3px #18372f;
+}
+.screen-battle .empower-toggle small { margin-top: 4px; font-size: 11px; color: #e5d8b5; }
+.screen-battle .empower-toggle input { appearance: none; position: relative; width: 15px; height: 15px; vertical-align: -2px; cursor: pointer; border: 1px solid #e2c987; border-radius: 3px; background: #15393b; box-shadow: inset 0 0 4px #0008; }
+.screen-battle .empower-toggle input:checked { background: linear-gradient(#f6dda2, #b9954b); }
+.screen-battle .empower-toggle input:checked::after { content: '✓'; position: absolute; inset: -2px 0 0; text-align: center; color: #214039; font: bold 13px Georgia, serif; }
+.screen-battle .battle-options { position: absolute; left: 45px; top: 784px; width: 260px; gap: 12px; }
+.screen-battle .battle-options .btn { background: #12353ee6; font: 18px Georgia, serif; min-height: 41px; }
+.screen-battle .encounter-button { position: absolute; left: 35px; top: 839px; width: 280px; min-height: 39px; font: 17px Cormorant, Georgia, serif; }
+
+.screen-battle .battle-footer {
+  left: 238px; right: auto; bottom: 18px; width: 900px; height: 73px; padding: 14px 24px 25px;
+  background: linear-gradient(#15313aea, #0b2631f5); border: 1px solid #d1b06c;
+  border-radius: 22px 7px 22px 7px; box-shadow: inset 0 0 0 4px #b9985130, 0 5px 12px #1b242b55;
+  color: #ffedba; font: 19px Georgia, serif; letter-spacing: 0;
+}
+.screen-battle .battle-footer > .icon { width: 24px; height: 24px; }
+.screen-battle .battle-footer > span { position: absolute; left: 60px; bottom: 6px; float: none; font: 11px/15px Georgia, serif; color: #bbcbc4; letter-spacing: 1px; }
+.screen-battle #toast { bottom: 108px; font-size: 15px; }
+.screen-battle .ultimate-cutin { border-color: #e0bf78; background: linear-gradient(90deg, #081f2bf5, #1a3f43ec, #081f2bf5); }
+.screen-battle .ultimate-cutin h2 { font: 600 42px/1.1 Cormorant, Georgia, serif; text-transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-battle .health i { transition: none; }
+  .screen-battle .battle-card .hero-art { animation: none; }
+}
+@keyframes battle-art-breath { from { scale: 1; } to { scale: 1.026; } }

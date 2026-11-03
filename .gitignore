@@ -1,0 +1,16 @@
+node_modules/
+release/
+test-results/
+playwright-report/
+*.log
+.pages-dist/
+# Local reference attachments and private workspace settings are not shipped.
+/ChatGPT Image *.png
+/mockup1.jpg
+/game-specification.md
+/.agents/
+/.codex/
+/.aws/
+.env
+.env.*
+*.save.json

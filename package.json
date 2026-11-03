@@ -1,0 +1,55 @@
+{
+  "name": "immortal-blossoms",
+  "version": "0.1.0",
+  "description": "An offline xianxia card RPG for Windows",
+  "author": "Blossom Studio",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "start": "electron .",
+    "test": "node --test tests/*.test.js",
+    "check": "node tools/validate.mjs",
+    "build": "electron-builder --win --dir",
+    "dist": "electron-builder --win portable",
+    "test:ui": "node tools/integration.mjs",
+    "test:desktop": "node tools/desktop-smoke.mjs",
+    "build:pages": "node tools/build-pages.mjs",
+    "test:pages": "node tools/pages-smoke.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/cinzel": "^5.3.0",
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@playwright/test": "^1.58.0",
+    "electron": "^41.0.0",
+    "electron-builder": "^26.0.12",
+    "node": "^22.23.4"
+  },
+  "build": {
+    "appId": "games.blossom.immortal",
+    "productName": "Immortal Blossoms",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "index.html",
+      "src/**/*",
+      "assets/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "signAndEditExecutable": true,
+      "icon": "assets/icon.ico",
+      "signExecutable": false
+    },
+    "portable": {
+      "artifactName": "Immortal-Blossoms-${version}-Windows.exe"
+    }
+  }
+}

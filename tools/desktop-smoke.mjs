@@ -1,0 +1,13 @@
+import {_electron as electron} from 'playwright';
+import path from 'node:path';
+const packaged=process.argv.includes('--packaged');
+const executablePath=path.resolve(packaged?'release/win-unpacked/Immortal Blossoms.exe':'node_modules/electron/dist/electron.exe');
+const app=await electron.launch({executablePath,args:packaged?[]:['.'],env:{...process.env,BLOSSOM_TEST:'1'}});
+const page=await app.firstWindow();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.waitForSelector('#stage.screen-home');await page.waitForTimeout(400);
+const info=await page.evaluate(()=>({url:location.href,api:typeof window.desktop?.exportSave,diagnostics:window.blossomDiagnostics()}));
+if(info.api!=='function')throw Error('Desktop save bridge is unavailable');
+await page.locator('[data-action="navigate"][data-screen="modes"]').first().click();
+if(await page.locator('.mode-tile').count()!==6)throw Error('Desktop modes did not load');
+await page.screenshot({path:'test-results/desktop.png'});
+await app.close();console.log(JSON.stringify({packaged,errors,...info},null,2));if(errors.length)process.exitCode=1;
